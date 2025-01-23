@@ -1,0 +1,19 @@
+{
+  "name": "graphql-with-ruby",
+  "version": "1.0.0",
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "json:server": "json-server --watch db.json --port 4000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "json-server": "^0.17.4"
+  }
+}

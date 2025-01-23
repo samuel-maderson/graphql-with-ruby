@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "companyId": 100
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "companyId": 102
+    },
+    {
+      "name": "cuclano",
+      "companyId": 101,
+      "id": 3
+    }
+  ]
+}
