@@ -1,38 +1,35 @@
-# frozen_string_literal: true
-
 module Types
   class QueryType < Types::BaseObject
-    field :node, Types::NodeType, null: true, description: "Fetches an object given its ID." do
-      argument :id, ID, required: true, description: "ID of the object."
+    # Field to fetch all users or a specific user by ID
+    field :users, [ UserType ], null: false, description: "Fetch all users or a specific user by ID" do
+      argument :id, ID, required: false, description: "ID of the user to fetch"
     end
 
-    def node(id:)
-      context.schema.object_from_id(id, context)
+    def users(id: nil)
+      if id
+        # Fetch all users
+        response = HTTP.get("http://localhost:4000/users/#{id}")
+        [ JSON.parse(response.body.to_s) ]
+      else
+        # Fetch all users
+        response = HTTP.get("http://localhost:4000/users")
+        JSON.parse(response.body.to_s)
+      end
     end
 
-    field :nodes, [ Types::NodeType, null: true ], null: true, description: "Fetches a list of objects given a list of IDs." do
-      argument :ids, [ ID ], required: true, description: "IDs of the objects."
+
+    field :companies, [ CompanyType ], null: false, description: "Fetch all companies" do
+      argument :id, ID, required: false, description: "ID to fetch a specific company"
     end
 
-    def nodes(ids:)
-      ids.map { |id| context.schema.object_from_id(id, context) }
-    end
-
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-    # TODO: remove me
-    field :test_field, String, null: false,
-      description: "An example field added by the generator"
-    def test_field
-      "Hello World!"
-    end
-
-    field :users, [ UserType ], null: false, description: "Fetch all items"
-
-    def users
-      response = HTTP.get("http://localhost:4000/users")
-      JSON.parse(response.body.to_s)
+    def companies(id: nil)
+      if id
+        response = HTTP.get("http://localhost:4000/companies/#{id}")
+        [ JSON.parse(response.body.to_s) ]
+      else
+        response = HTTP.get("http://localhost:4000/companies")
+        JSON.parse(response.body.to_s)
+      end
     end
   end
 end
