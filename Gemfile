@@ -68,3 +68,10 @@ gem "httparty"
 gem "graphiql-rails", group: :development
 gem "http"
 gem "json"
+
+
+# for testing purpose
+gem "rspec-rails"
+gem "graphql"
+gem "factory_bot_rails"  # To create test data
+gem "faker"  # For generating fake data
